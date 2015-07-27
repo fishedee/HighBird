@@ -21,6 +21,7 @@ public class SplashActivity extends Activity {
         setContentView(R.layout.activity_splash);
         ImageView image = (ImageView)findViewById(R.id.imageView);
         Animation animation = AnimationUtils.loadAnimation(this,R.anim.anim);
+        animation.setFillAfter(true);
         image.startAnimation(animation);
         new Thread(new Runnable() {
             @Override
@@ -45,7 +46,7 @@ public class SplashActivity extends Activity {
         try{
             //初始化DashBoard
             DashBoard instance = DashBoard.getInstance();
-            instance.initialize("http://192.168.2.1:8082/hybirdapp/config.json");
+            instance.initialize("http://www.test.hongbeibang.com/config.html");
             //启动页面
             m_handler.sendEmptyMessage(0x123);
         }catch(Exception e){

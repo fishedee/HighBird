@@ -2,6 +2,7 @@ package com.fishedee.highbrid;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 
 import com.fishedee.highbrid.data.Config;
@@ -106,22 +107,17 @@ public class DashBoard {
         m_loadingPage = getNetworkFile(getRealUrl(m_config.getLoading()));
     }
 
-    public void initialize(String configUrl) {
-        try {
-            if (m_hasInitialize)
-                return;
+    public void initialize(String configUrl)throws Exception {
+        if (m_hasInitialize)
+            return;
 
-            //读取配置文件
-            loadConfig(configUrl);
+        //读取配置文件
+        loadConfig(configUrl);
 
-            //预读取loading页面
-            loadLoadingPage();
+        //预读取loading页面
+        loadLoadingPage();
 
-            m_hasInitialize = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        m_hasInitialize = true;
     }
 
     public View createView(Activity activity) {

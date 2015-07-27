@@ -11,10 +11,4 @@
         android:fillAfter="true"
         android:duration="5000"
         />
-    <!--透明度变换-->
-    <alpha
-        android:fromAlpha="1.0"
-        android:toAlpha="0.5"
-        android:duration="5000"
-        />
 </set>
