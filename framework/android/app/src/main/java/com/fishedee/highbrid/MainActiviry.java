@@ -4,46 +4,25 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.webkit.SslErrorHandler;
 import android.content.Intent;
 
 
 public class MainActiviry extends ActionBarActivity {
 
-    WebView webview;
-
-    WebViewClient webviewclient = new WebViewClient(){
-        @Override
-        public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            Intent intent = new Intent();
-            intent.putExtra("url", url);
-            intent.setClass(MainActiviry.this, MainActiviry.class);
-            startActivity(intent);
-            overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-            return true;
-        }
-
-        @Override
-        public void onReceivedSslError(WebView view, SslErrorHandler handler, android.net.http.SslError error) {
-            handler.proceed();
-        }
-    };
+    MainWebView m_webview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
         Intent intent=getIntent();
         String url =intent.getStringExtra("url");
         if( url == null || url == "")
-            url = "http://www.baidu.com";
-
-        super.onCreate(savedInstanceState);
-        webview = new WebView(this);
-        setContentView(webview);
-        webview.getSettings().setJavaScriptEnabled(true);
-        webview.setWebViewClient(webviewclient);
-        webview.loadUrl(url);
+            url = "http://192.168.2.1:8082/hybirdapp/index.html";
+        m_webview = new MainWebView(this);
+        m_webview.loadUrl(url);
+       // m_webview.go();
+        setContentView(m_webview);
     }
 
     @Override
