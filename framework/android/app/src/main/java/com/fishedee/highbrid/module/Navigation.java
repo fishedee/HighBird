@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.webkit.JavascriptInterface;
 import android.content.Intent;
 
+import com.fishedee.highbrid.R;
+
 /**
  * Created by fish on 7/23/15.
  */
