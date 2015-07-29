@@ -2,7 +2,6 @@ package com.fishedee.highbrid;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 
 import com.fishedee.highbrid.data.Config;
@@ -127,6 +126,8 @@ public class DashBoard {
             url = m_config.getIndex();
         if (url.indexOf("http") != 0)
             url = "http://" + m_config.getDomain() + "/" + url;
-        return new MyWebView(activity, url, m_loadingPage);
+        MyWebView webview = new MyWebView(activity);
+        webview.setContent(url,m_loadingPage);
+        return webview;
     }
 }

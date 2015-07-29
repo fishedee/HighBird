@@ -1,14 +1,14 @@
 package com.fishedee.highbrid.layout;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.util.Log;
+
+import android.app.Activity;
+import android.content.Context;
+import android.util.AttributeSet;
 import android.webkit.JsResult;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.app.Activity;
-import android.webkit.WebSettings;
 
 import com.fishedee.highbrid.module.HighBrid;
 
@@ -46,9 +46,23 @@ public class MainWebView extends WebView{
     };
     Activity m_activity;
 
-    public MainWebView(Activity activity){
-        super(activity);
-        m_activity = activity;
+    public MainWebView(Context context){
+        super(context);
+        initialize(context);
+    }
+
+    public MainWebView(Context context,AttributeSet attrs ){
+        super(context,attrs);
+        initialize(context);
+    }
+
+    public MainWebView(Context context,AttributeSet attrs,int defStyle ){
+        super(context,attrs,defStyle);
+        initialize(context);
+    }
+
+    private void initialize(Context context){
+        m_activity = (Activity)context;
         //配置参数
         this.getSettings().setJavaScriptEnabled(true);
         this.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
