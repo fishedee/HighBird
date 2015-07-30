@@ -1,4 +1,4 @@
-package com.fishedee.highbrid.layout;
+package com.fishedee.highbrid.layout.widget;
 
 import android.app.Activity;
 import android.content.Context;

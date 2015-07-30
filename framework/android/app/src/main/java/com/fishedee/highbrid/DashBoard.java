@@ -2,10 +2,12 @@ package com.fishedee.highbrid;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 
 import com.fishedee.highbrid.data.Config;
-import com.fishedee.highbrid.layout.MyWebView;
+import com.fishedee.highbrid.layout.TitleView;
+import com.fishedee.highbrid.layout.widget.MyWebViewOption;
 
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -24,6 +26,7 @@ public class DashBoard {
     private static DashBoard dashBoard;
     Config m_config;
     String m_loadingPage;
+    JSONObject m_configJson;
     boolean m_hasInitialize;
 
     private DashBoard() {
@@ -55,6 +58,7 @@ public class DashBoard {
         //分析为json格式文件
         JSONTokener jsonTokener = new JSONTokener(jsonString);
         JSONObject jsonObject = (JSONObject) jsonTokener.nextValue();
+        m_configJson = jsonObject;
         Config config = new Config();
 
         config.setTitle(jsonObject.getString("name"));
@@ -120,14 +124,25 @@ public class DashBoard {
     }
 
     public View createView(Activity activity) {
-        Intent intent = activity.getIntent();
-        String url = intent.getStringExtra("url");
-        if (url == null)
-            url = m_config.getIndex();
-        if (url.indexOf("http") != 0)
-            url = "http://" + m_config.getDomain() + "/" + url;
-        MyWebView webview = new MyWebView(activity);
-        webview.setContent(url,m_loadingPage);
-        return webview;
+        try {
+            Intent intent = activity.getIntent();
+            String url = intent.getStringExtra("url");
+            if (url == null)
+                url = m_config.getIndex();
+            if (url.indexOf("http") != 0)
+                url = "http://" + m_config.getDomain() + "/" + url;
+
+            MyWebViewOption option = new MyWebViewOption();
+            option.setContentViewUrl(url);
+            option.setLoadingViewHtml(m_loadingPage);
+
+            TitleView view = new TitleView(activity);
+            Log.d("json",m_configJson.toString());
+            view.setContent(m_configJson.getJSONObject("view").getJSONObject("view1"));
+            return view;
+        }catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
 }

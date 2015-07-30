@@ -1,4 +1,4 @@
-package com.fishedee.highbrid.layout;
+package com.fishedee.highbrid.layout.widget;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,6 +9,8 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
 import com.fishedee.highbrid.R;
+import com.fishedee.highbrid.layout.widget.MainWebView;
+import com.fishedee.highbrid.layout.widget.MyWebViewOption;
 
 import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
@@ -33,15 +35,15 @@ public class MyWebView extends RelativeLayout{
         initialize(context);
     }
     private void initialize(Context context){
-        m_contentView = (FrameLayout)((Activity)context).getLayoutInflater().inflate(R.layout.mywebview,null);
+        m_contentView = (FrameLayout)((Activity)context).getLayoutInflater().inflate(R.layout.my_webview,null);
         ViewGroup.LayoutParams params=new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);
         this.addView(m_contentView, params);
     }
-    public void setContent(String contentViewUrl,String loadingViewHtml){
+    public void setContent(MyWebViewOption option){
         //初始化loadingView
         final MainWebView loadingWebView = (MainWebView)m_contentView.findViewById(R.id.loading_view);
-        loadingWebView.loadData(loadingViewHtml, "text/html; charset=UTF-8", null);
+        loadingWebView.loadData(option.loadingViewHtml, "text/html; charset=UTF-8", null);
         //初始化contentView
         final MainWebView contentWebView = (MainWebView)m_contentView.findViewById(R.id.content_view);
         contentWebView.importJavascript();
@@ -74,6 +76,6 @@ public class MyWebView extends RelativeLayout{
                 pullRefreshLayout.refreshComplete();
             }
         });
-        contentWebView.loadUrl(contentViewUrl);
+        contentWebView.loadUrl(option.contentViewUrl);
     }
 }
