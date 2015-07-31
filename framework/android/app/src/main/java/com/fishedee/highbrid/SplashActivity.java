@@ -45,8 +45,10 @@ public class SplashActivity extends Activity {
     public void start(){
         try{
             //初始化DashBoard
-            DashBoard instance = DashBoard.getInstance();
-            instance.initialize("http://192.168.2.1:8082/hybirdapp/config.json");
+            MainActivity.initialize(
+                    getApplicationContext(),
+                    "http://192.168.2.1:8082/hybirdapp/config.xml"
+                    );
             //启动页面
             m_handler.sendEmptyMessage(0x123);
         }catch(Exception e){

@@ -1,17 +1,16 @@
-package com.fishedee.highbrid.module;
+package com.fishedee.highbrid.event;
 
 
-import android.app.Activity;
 import android.content.Context;
-import android.webkit.JavascriptInterface;
 import android.util.Log;
+import android.webkit.JavascriptInterface;
 
 /**
  * Created by fish on 7/23/15.
  */
 public class Console{
 
-    public Console(){
+    public Console(Context context){
 
     }
 

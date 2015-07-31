@@ -1,4 +1,4 @@
-package com.fishedee.highbrid.layout.widget;
+package com.fishedee.highbrid.view.widget;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,7 +10,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.fishedee.highbrid.module.HighBrid;
+import com.fishedee.highbrid.MainActivity;
 
 /**
  * Created by fish on 7/23/15.
@@ -74,7 +74,7 @@ public class MainWebView extends WebView{
 
     public void importJavascript(){
         //配置js库
-        this.addJavascriptInterface(new HighBrid(m_activity), "HighBrid");
+        this.addJavascriptInterface(((MainActivity)getContext()).getEvent(), "HighBrid");
     }
 
     Listener m_pageFinishListener;
