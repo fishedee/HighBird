@@ -1,0 +1,38 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>烘焙帮</title>
+		<style>
+			*{
+				margin:0px;
+				padding:0px;
+			}
+			body{
+				background:#FFFFFF;
+			}
+			div{
+				margin-top:300px;
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		<div>正在载入中<span id="load">.</span></div>
+		<script>
+			setInterval(function(){
+				var dom = document.getElementById("load");
+				var dom2 = document.getElementById("time");
+				var text = dom.innerText;
+				if( text == "."){
+					text = "..";
+				}else if( text == ".."){
+					text = "...";
+				}else{
+					text = ".";
+				}
+				dom.innerText = text;
+			},500);
+		</script>
+	</body>
+</html>

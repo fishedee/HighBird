@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<HighBrid>
+	<name>烘焙帮</name>
+	<domain>192.168.2.1:8082/hybirdapp</domain>
+	<index>index.html</index>
+	<loading>loading.html</loading>
+	<router>
+		<item url="index.html" view="indexView"/>
+		<item url="detail.html" view="detailView"/>
+	</router>
+	<view>
+		<RootView name="indexView" backgroundColor="#FFFFFFFF">
+			<NavigationBar backgroundColor="#FF14A2D4" height="50px">
+				<NavigationBarItem 
+					text="电影列表" color="#FFFFFFFF" fontSize="18px"
+				/>
+			</NavigationBar>
+			<WebView url="@url">
+			</WebView>
+		</RootView>
+		<RootView name="detailView" backgroundColor="#FFFFFFFF">
+			<NavigationBar backgroundColor="#FF14A2D4" height="50px">
+				<NavigationBarItem 
+					float="left"
+					text="返回" color="#FFFFFFFF" fontSize="14px" marginLeft="5px" paddingTop="5px" paddingBottom="5px" paddingLeft="5px" paddingRight="5px"
+					activeColor="#FFFF0000" 
+					click="back"
+				/>
+				<NavigationBarItem 
+					text="电影详情" color="#FFFFFFFF" fontSize="18px"
+				/>
+				<NavigationBarItem 
+					float="right"
+					text="打印日志" color="#FFFFFFFF" fontSize="14px" marginRight="10px"
+					click="console"
+				/>
+			</NavigationBar>
+			<WebView url="@url">
+			</WebView>
+		</RootView>
+	</view>
+	<event>
+		<item name="back">
+			<Navigation method="back"/>
+		</item>
+		<item name="console">
+			<Console method="log">
+				<argv>Hello World</argv>
+			</Console>
+		</item>
+	</event>
+</HighBrid>
