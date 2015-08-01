@@ -51,7 +51,7 @@ public class WebView extends RelativeLayout{
             @Override
             public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
                 //return false;
-                return PtrDefaultHandler.checkContentCanBePulledDown(frame, m_pullRefreshLayout, header);
+                return PtrDefaultHandler.checkContentCanBePulledDown(frame, m_contentWebView, header);
             }
 
             @Override

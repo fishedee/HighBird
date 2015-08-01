@@ -37,6 +37,7 @@ public class Util {
         RequestFuture<String> future = RequestFuture.newFuture();
         StringRequest request = new StringRequest(url,future,future);
         queue.add(request);
-        return future.get();
+        String result = future.get();
+        return new String(result.getBytes("ISO-8859-1"),"UTF-8");
     }
 }

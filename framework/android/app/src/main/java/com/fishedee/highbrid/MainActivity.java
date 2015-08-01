@@ -33,7 +33,7 @@ public class MainActivity extends Activity {
         if( url == null || url.equals(""))
             url = m_indexUrl;
         if( url.indexOf("http://") != 0 )
-            url = "http://"+m_domain+"/"+m_indexUrl;
+            url = "http://"+m_domain+"/"+url;
         return url;
     }
     public static void initialize(Context context,String url)throws Exception{
@@ -98,12 +98,21 @@ public class MainActivity extends Activity {
         }
     }
 
+    public String getSystemVariable(String name){
+        if( name.equals("url"))
+            return m_url;
+        else if( name.equals("name"))
+            return m_name;
+        else
+            return "";
+    }
+
     public String getUrl(){
         return m_url;
     }
 
     private void setUrl(){
-        Intent intent = new Intent();
+        Intent intent = getIntent();
         String url = intent.getStringExtra("url");
         m_url = getRealUrl(url);
     }

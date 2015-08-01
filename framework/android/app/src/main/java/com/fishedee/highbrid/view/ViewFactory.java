@@ -3,6 +3,7 @@ package com.fishedee.highbrid.view;
 import android.content.Context;
 import android.view.View;
 
+import com.fishedee.highbrid.MainActivity;
 import com.fishedee.highbrid.view.widget.ColorParameter;
 import com.fishedee.highbrid.view.widget.DimemsionParameter;
 import com.fishedee.highbrid.view.widget.IntegerParameter;
@@ -101,6 +102,12 @@ public class ViewFactory {
     }
 
     private Object createViewParameter(Class parameterType,String parameterString)throws Exception{
+        //执行预定义变量过滤
+        if( parameterString.indexOf("@") == 0 ){
+            MainActivity activity = (MainActivity)m_context;
+            parameterString = activity.getSystemVariable(parameterString.substring(1));
+        }
+        //设置数据
         if( parameterType == IntegerParameter.class ){
             IntegerParameter result = new IntegerParameter();
             result.value = parseInt(parameterString);
@@ -118,10 +125,10 @@ public class ViewFactory {
             if( parameterString.lastIndexOf("px") == parameterString.length() - 2 )
                 parameterString = parameterString.substring(0,parameterString.length()-2);
             result.value = dip2px(m_context, parseInt(parameterString));
+            return result;
         }else{
             throw new Exception("不合法的参数类型"+parameterType.getName());
         }
-        return 1;
     }
 
     private void setObjectFromNameAndValue(Object view,String name,String value)throws Exception{

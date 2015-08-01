@@ -5,6 +5,8 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.fishedee.highbrid.view.widget.ColorParameter;
+import com.fishedee.highbrid.view.widget.DimemsionParameter;
 import com.fishedee.highbrid.view.widget.StringParameter;
 
 /**
@@ -17,20 +19,30 @@ public class NavigationBar extends LinearLayout{
 
     public static class MyLayout{
         int gravity;
+        int marginLeft = 0;
+        int marginRight = 0;
         public MyLayout(){
-            gravity = -1;
+            gravity = 0;
         }
 
-        public void setMyGravity(StringParameter parameter)throws Exception{
+        public void setMyFloat(StringParameter parameter)throws Exception{
             String result = parameter.value;
-            if( result == "left")
+            if( result.equals("left"))
                 gravity = -1;
-            else if( result == "center")
+            else if( result.equals("center"))
                 gravity = 0;
-            else if( result == "right")
+            else if( result.equals("right"))
                 gravity = 1;
             else
                 throw new Exception("不合法的gravity:"+result);
+        }
+
+        public void setMyMarginLeft(DimemsionParameter parameter){
+            marginLeft = parameter.value;
+        }
+
+        public void setMyMarginRight(DimemsionParameter parameter){
+            marginRight = parameter.value;
         }
     }
 
@@ -69,8 +81,8 @@ public class NavigationBar extends LinearLayout{
         this.addView(m_rightLayout,rightLayoutParams);
     }
 
-    public void setMyBackgroundColor( int color ){
-        this.setBackgroundColor(color);
+    public void setMyBackgroundColor( ColorParameter color ){
+        this.setBackgroundColor(color.value);
     }
 
     public void addMyView( View view , MyLayout layout ){
@@ -79,6 +91,7 @@ public class NavigationBar extends LinearLayout{
                 LayoutParams.WRAP_CONTENT,
                 0
         );
+        params.setMargins(layout.marginLeft,0,layout.marginRight,0);
         if( layout.gravity == -1 )
             m_leftLayout.addView(view,params);
         else if( layout.gravity == 0 )
